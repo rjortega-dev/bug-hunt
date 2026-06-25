@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import "./style.css";
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
