@@ -46,8 +46,8 @@ export class BootScene extends Phaser.Scene {
     });
 
     // Background layers
-    this.load.image("bg_far", "/assets/background/far_buildings.png");
-    this.load.image("bg_back", "/assets/background/back_buildings.png");
+    this.load.image("bg_middle", "/assets/background/2_middle.png");
+    this.load.image("bg_back", "/assets/background/2_back.png");
     this.load.image("bg_foreground", "/assets/background/2_foreground.png");
 
     // Duck companion
@@ -61,7 +61,6 @@ export class BootScene extends Phaser.Scene {
   }
 
   create() {
-    console.log("BootScene ready");
-    // Will transition to GameScene once assets are loaded
+    this.scene.start("GameScene");
   }
 }

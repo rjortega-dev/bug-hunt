@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import "./style.css";
 import { BootScene } from "./scenes/BootScene";
+import { GameScene } from "./scenes/GameScene";
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -8,7 +9,7 @@ const config: Phaser.Types.Core.GameConfig = {
   height: 600,
   backgroundColor: "#0a0a0f",
   pixelArt: true,
-  scene: [BootScene],
+  scene: [BootScene, GameScene],
 };
 
 new Phaser.Game(config);
