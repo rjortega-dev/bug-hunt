@@ -52,8 +52,8 @@ export class BootScene extends Phaser.Scene {
 
     // Duck companion
     this.load.spritesheet("duck", "/assets/duck/duck_sprite.png", {
-      frameWidth: 88,
-      frameHeight: 66,
+      frameWidth: 22,
+      frameHeight: 22,
     });
 
     // Music
