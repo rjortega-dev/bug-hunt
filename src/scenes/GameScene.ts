@@ -1,9 +1,12 @@
 import Phaser from "phaser";
+import { Enemy } from "../entities/Enemy";
 
 export class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: "GameScene" });
   }
+
+  private enemy!: Enemy;
 
   create() {
     const bg_back = this.add.image(400, 300, "bg_back").setScrollFactor(0);
@@ -16,7 +19,19 @@ export class GameScene extends Phaser.Scene {
       .image(400, 300, "bg_foreground")
       .setScrollFactor(0);
     bg_foreground.setDisplaySize(800, 600);
+
+    this.enemy = new Enemy(this, 850, 300);
+
+    this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+      const bounds = this.enemy.getBounds();
+      if (bounds.contains(pointer.x, pointer.y)) {
+        console.log("hit!");
+        this.enemy.x = 850;
+      }
+    });
   }
 
-  update() {}
+  update() {
+    this.enemy.update();
+  }
 }
