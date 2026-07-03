@@ -25,8 +25,7 @@ export class GameScene extends Phaser.Scene {
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
       const bounds = this.enemy.getBounds();
       if (bounds.contains(pointer.x, pointer.y)) {
-        console.log("hit!");
-        this.enemy.x = 850;
+        this.enemy.hit();
       }
     });
   }
