@@ -3,12 +3,18 @@ import Phaser from "phaser";
 export class Enemy extends Phaser.GameObjects.Sprite {
   private speed: number;
   private isHit: boolean = false;
+  private minY: number;
+  private maxY: number;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "enemy3_idle");
     scene.add.existing(this);
     this.setScale(2);
     this.speed = 100;
+
+    // Bounds for random Y respawns — tweak to taste for your 800x600 canvas
+    this.minY = 100;
+    this.maxY = 500;
 
     scene.anims.create({
       key: "enemy_fly",
@@ -31,6 +37,11 @@ export class Enemy extends Phaser.GameObjects.Sprite {
     });
 
     this.play("enemy_fly");
+    this.y = this.getRandomY();
+  }
+
+  private getRandomY(): number {
+    return Phaser.Math.Between(this.minY, this.maxY);
   }
 
   hit() {
@@ -40,6 +51,7 @@ export class Enemy extends Phaser.GameObjects.Sprite {
     this.once("animationcomplete", () => {
       this.isHit = false;
       this.x = 850;
+      this.y = this.getRandomY();
       this.play("enemy_fly");
     });
   }
@@ -49,6 +61,7 @@ export class Enemy extends Phaser.GameObjects.Sprite {
     this.x -= this.speed * (1 / 60);
     if (this.x < -50) {
       this.x = 850;
+      this.y = this.getRandomY();
     }
   }
 }

@@ -20,6 +20,7 @@ export class GameScene extends Phaser.Scene {
       .setScrollFactor(0);
     bg_foreground.setDisplaySize(800, 600);
 
+    // y is overwritten with a random value inside Enemy's constructor
     this.enemy = new Enemy(this, 850, 300);
 
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
