@@ -37,10 +37,7 @@ export class Enemy extends Phaser.GameObjects.Sprite {
     });
 
     this.play("enemy_fly");
-    this.setInteractive(
-      new Phaser.Geom.Rectangle(0, 0, this.width, this.height),
-      Phaser.Geom.Rectangle.Contains,
-    );
+    this.enableHitDetection();
     this.y = this.getRandomY();
   }
 
@@ -48,15 +45,24 @@ export class Enemy extends Phaser.GameObjects.Sprite {
     return Phaser.Math.Between(this.minY, this.maxY);
   }
 
+  private enableHitDetection() {
+    this.setInteractive(
+      new Phaser.Geom.Rectangle(0, 0, this.width, this.height),
+      Phaser.Geom.Rectangle.Contains,
+    );
+  }
+
   hit() {
     if (this.isHit) return;
     this.isHit = true;
+    this.disableInteractive();
     this.play("enemy_die");
     this.once("animationcomplete", () => {
       this.isHit = false;
       this.x = 850;
       this.y = this.getRandomY();
       this.play("enemy_fly");
+      this.enableHitDetection();
     });
   }
 
