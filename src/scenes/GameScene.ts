@@ -6,7 +6,8 @@ export class GameScene extends Phaser.Scene {
     super({ key: "GameScene" });
   }
 
-  private enemy!: Enemy;
+  private enemies: Enemy[] = [];
+  private readonly enemyCount = 3;
 
   create() {
     const bg_back = this.add.image(400, 300, "bg_back").setScrollFactor(0);
@@ -20,18 +21,17 @@ export class GameScene extends Phaser.Scene {
       .setScrollFactor(0);
     bg_foreground.setDisplaySize(800, 600);
 
-    // y is overwritten with a random value inside Enemy's constructor
-    this.enemy = new Enemy(this, 850, 300);
-
-    this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      const bounds = this.enemy.getBounds();
-      if (bounds.contains(pointer.x, pointer.y)) {
-        this.enemy.hit();
-      }
-    });
+    for (let i = 0; i < this.enemyCount; i++) {
+      const spawnX = 850 + i * 150;
+      const enemy = new Enemy(this, spawnX, 300);
+      enemy.on("pointerdown", () => enemy.hit());
+      this.enemies.push(enemy);
+    }
   }
 
   update() {
-    this.enemy.update();
+    for (const enemy of this.enemies) {
+      enemy.update();
+    }
   }
 }

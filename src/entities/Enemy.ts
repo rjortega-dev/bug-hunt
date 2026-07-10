@@ -37,6 +37,10 @@ export class Enemy extends Phaser.GameObjects.Sprite {
     });
 
     this.play("enemy_fly");
+    this.setInteractive(
+      new Phaser.Geom.Rectangle(0, 0, this.width, this.height),
+      Phaser.Geom.Rectangle.Contains,
+    );
     this.y = this.getRandomY();
   }
 
