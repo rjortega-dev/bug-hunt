@@ -9,6 +9,7 @@ const config: Phaser.Types.Core.GameConfig = {
   height: 600,
   backgroundColor: "#0a0a0f",
   pixelArt: true,
+  parent: "game-root",
   scene: [BootScene, GameScene],
 };
 

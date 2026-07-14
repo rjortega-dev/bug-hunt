@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { Enemy } from "../entities/Enemy";
+import { hud } from "../ui/Hud";
 
 export class GameScene extends Phaser.Scene {
   constructor() {
@@ -9,7 +10,6 @@ export class GameScene extends Phaser.Scene {
   private enemies: Enemy[] = [];
   private readonly enemyCount = 3;
   private score: number = 0;
-  private scoreText!: Phaser.GameObjects.Text;
 
   create() {
     const bg_back = this.add.image(400, 300, "bg_back").setScrollFactor(0);
@@ -29,15 +29,12 @@ export class GameScene extends Phaser.Scene {
       enemy.on("pointerdown", () => {
         enemy.hit();
         this.score += 10;
-        this.scoreText.setText(`Score: ${this.score}`);
+        hud.setScore(this.score);
       });
       this.enemies.push(enemy);
     }
 
-    this.scoreText = this.add.text(16, 16, "Score: 0", {
-      fontSize: "24px",
-      color: "#ffffff",
-    });
+    hud.setScore(this.score);
   }
 
   update() {
