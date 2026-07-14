@@ -12,7 +12,6 @@ export class Enemy extends Phaser.GameObjects.Sprite {
     this.setScale(2);
     this.speed = 100;
 
-    // Bounds for random Y respawns — tweak to taste for your 800x600 canvas
     this.minY = 100;
     this.maxY = 500;
 

@@ -8,6 +8,8 @@ export class GameScene extends Phaser.Scene {
 
   private enemies: Enemy[] = [];
   private readonly enemyCount = 3;
+  private score: number = 0;
+  private scoreText!: Phaser.GameObjects.Text;
 
   create() {
     const bg_back = this.add.image(400, 300, "bg_back").setScrollFactor(0);
@@ -24,9 +26,18 @@ export class GameScene extends Phaser.Scene {
     for (let i = 0; i < this.enemyCount; i++) {
       const spawnX = 850 + i * 150;
       const enemy = new Enemy(this, spawnX, 300);
-      enemy.on("pointerdown", () => enemy.hit());
+      enemy.on("pointerdown", () => {
+        enemy.hit();
+        this.score += 10;
+        this.scoreText.setText(`Score: ${this.score}`);
+      });
       this.enemies.push(enemy);
     }
+
+    this.scoreText = this.add.text(16, 16, "Score: 0", {
+      fontSize: "24px",
+      color: "#ffffff",
+    });
   }
 
   update() {
