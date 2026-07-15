@@ -29,6 +29,14 @@ export class GameScene extends Phaser.Scene {
     startScreen.onStart(() => {
       this.startGame();
     });
+
+    this.game.events.on("blur", () => {
+      this.scene.pause();
+    });
+
+    this.game.events.on("focus", () => {
+      this.scene.resume();
+    });
   }
 
   private startGame() {
