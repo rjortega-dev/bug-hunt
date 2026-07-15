@@ -35,6 +35,10 @@ export class GameScene extends Phaser.Scene {
     }
 
     hud.setScore(this.score);
+
+    this.input.once("pointerdown", () => {
+      this.sound.play("bgm", { loop: true, volume: 0.5 });
+    });
   }
 
   update() {
