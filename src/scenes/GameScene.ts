@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { Enemy } from "../entities/Enemy";
 import { hud } from "../ui/Hud";
+import { startScreen } from "../ui/StartScreen";
 
 export class GameScene extends Phaser.Scene {
   constructor() {
@@ -23,6 +24,14 @@ export class GameScene extends Phaser.Scene {
       .setScrollFactor(0);
     bg_foreground.setDisplaySize(800, 600);
 
+    hud.setScore(this.score);
+
+    startScreen.onStart(() => {
+      this.startGame();
+    });
+  }
+
+  private startGame() {
     for (let i = 0; i < this.enemyCount; i++) {
       const spawnX = 850 + i * 150;
       const enemy = new Enemy(this, spawnX, 300);
@@ -34,11 +43,7 @@ export class GameScene extends Phaser.Scene {
       this.enemies.push(enemy);
     }
 
-    hud.setScore(this.score);
-
-    this.input.once("pointerdown", () => {
-      this.sound.play("bgm", { loop: true, volume: 0.5 });
-    });
+    this.sound.play("bgm", { loop: true, volume: 0.5 });
   }
 
   update() {

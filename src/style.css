@@ -46,3 +46,34 @@ canvas {
 .hud-value {
   font-weight: bold;
 }
+
+#game-wrapper {
+  position: relative;
+  width: 800px;
+  height: 600px;
+}
+
+#start-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#start-button {
+  font-size: 20px;
+  padding: 12px 32px;
+  background: #63ffff;
+  color: #0a0a0f;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+#start-button:hover {
+  background: #51d4d4;
+}
