@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { Enemy } from "../entities/Enemy";
 import { hud } from "../ui/Hud";
 import { startScreen } from "../ui/StartScreen";
+import { controls } from "../ui/Controls";
 
 export class GameScene extends Phaser.Scene {
   constructor() {
@@ -11,6 +12,7 @@ export class GameScene extends Phaser.Scene {
   private enemies: Enemy[] = [];
   private readonly enemyCount = 3;
   private score: number = 0;
+  private isManuallyPaused: boolean = false;
 
   create() {
     const bg_back = this.add.image(400, 300, "bg_back").setScrollFactor(0);
@@ -30,13 +32,30 @@ export class GameScene extends Phaser.Scene {
       this.startGame();
     });
 
+    controls.onPauseToggle(() => {
+      this.togglePause();
+    });
+
     this.game.events.on("blur", () => {
       this.scene.pause();
     });
 
     this.game.events.on("focus", () => {
-      this.scene.resume();
+      if (!this.isManuallyPaused) {
+        this.scene.resume();
+      }
     });
+  }
+
+  private togglePause() {
+    this.isManuallyPaused = !this.isManuallyPaused;
+    if (this.isManuallyPaused) {
+      this.scene.pause();
+      controls.setPauseLabel("Resume");
+    } else {
+      this.scene.resume();
+      controls.setPauseLabel("Pause");
+    }
   }
 
   private startGame() {
