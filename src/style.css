@@ -53,7 +53,7 @@ canvas {
   height: 600px;
 }
 
-#start-overlay {
+.game-overlay {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
@@ -62,7 +62,7 @@ canvas {
   justify-content: center;
 }
 
-#start-button {
+.overlay-button {
   font-size: 20px;
   padding: 12px 32px;
   background: #63ffff;
@@ -74,8 +74,8 @@ canvas {
   font-weight: bold;
 }
 
-#start-button:hover {
-  background: #51d4d4;
+.overlay-button:hover {
+  background: #49bdbd;
 }
 
 #hud {

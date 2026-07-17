@@ -37,12 +37,17 @@ export class GameScene extends Phaser.Scene {
       this.togglePause();
     });
 
+    controls.onResumeClick(() => {
+      this.togglePause();
+    });
+
     this.game.events.on("blur", () => {
       if (!this.isManuallyPaused) {
         this.isManuallyPaused = true;
         this.scene.pause();
         this.bgm?.pause();
         controls.setPauseLabel("Resume");
+        controls.showPauseOverlay();
       }
     });
   }
@@ -53,10 +58,12 @@ export class GameScene extends Phaser.Scene {
       this.scene.pause();
       this.bgm?.pause();
       controls.setPauseLabel("Resume");
+      controls.showPauseOverlay();
     } else {
       this.scene.resume();
       this.bgm?.resume();
       controls.setPauseLabel("Pause");
+      controls.hidePauseOverlay();
     }
   }
 
