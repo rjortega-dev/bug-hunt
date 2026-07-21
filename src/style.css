@@ -96,3 +96,23 @@ canvas {
 .hud-button:hover {
   background: #2a2a3a;
 }
+
+#shortcut-legend {
+  width: 800px;
+  text-align: center;
+  color: #6b6b80;
+  font-family: sans-serif;
+  font-size: 13px;
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+#shortcut-legend kbd {
+  background: #1e1e30;
+  border: 1px solid #33334d;
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-family: monospace;
+  font-size: 12px;
+  color: #ffffff;
+}

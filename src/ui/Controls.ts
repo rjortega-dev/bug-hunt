@@ -19,6 +19,14 @@ class Controls {
     this.resumeButtonEl.addEventListener("click", callback);
   }
 
+  onEscapePress(callback: () => void) {
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        callback();
+      }
+    });
+  }
+
   setPauseLabel(label: string) {
     if (this.pauseButtonEl) {
       this.pauseButtonEl.textContent = label;

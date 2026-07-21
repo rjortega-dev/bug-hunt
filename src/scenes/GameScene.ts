@@ -13,6 +13,7 @@ export class GameScene extends Phaser.Scene {
   private readonly enemyCount = 3;
   private score: number = 0;
   private isManuallyPaused: boolean = false;
+  private isStarted: boolean = false;
   private bgm!: Phaser.Sound.BaseSound;
 
   create() {
@@ -50,6 +51,12 @@ export class GameScene extends Phaser.Scene {
         controls.showPauseOverlay();
       }
     });
+
+    controls.onEscapePress(() => {
+      if (this.isStarted) {
+        this.togglePause();
+      }
+    });
   }
 
   private togglePause() {
@@ -68,6 +75,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   private startGame() {
+    this.isStarted = true;
+
     for (let i = 0; i < this.enemyCount; i++) {
       const spawnX = 850 + i * 150;
       const enemy = new Enemy(this, spawnX, 300);
